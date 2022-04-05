@@ -235,15 +235,15 @@ if option == 'Investment':
             if submitButton == True:
                 if cap == 'Nasdaq':
                     st.write(cap)
-                    df = pd.read_csv('NASDAQ.csv')
+                    df = pd.read_csv('./NASDAQ.csv')
                     black_litterman(df, cash)
                 if cap == 'Large Cap':
                     st.write(cap)
-                    df = pd.read_csv('Large_cap.csv')
+                    df = pd.read_csv('./Large_cap.csv')
                     black_litterman(df, cash)
                 if cap == 'Mid Cap':
                     st.write(cap)
-                    df = pd.read_csv('mid_cap.csv')
+                    df = pd.read_csv('./mid_cap.csv')
                     black_litterman(df, cash)
 
         

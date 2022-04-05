@@ -1,0 +1,15 @@
+streamlit
+pandas
+plotly
+requests
+tweepy
+numpy
+redis
+matplot
+scipy
+sklearn
+matplotlib
+seaborn
+pandas-datareader
+PyPortfolioOpt
+pulp

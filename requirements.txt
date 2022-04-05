@@ -13,3 +13,5 @@ seaborn
 pandas-datareader
 PyPortfolioOpt
 pulp
+config
+json

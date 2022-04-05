@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import requests, redis
-import config, json
+import config
+import json
 from iex import IEXStock
 from datetime import datetime, timedelta 
 import datetime as dt

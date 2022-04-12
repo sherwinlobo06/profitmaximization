@@ -203,7 +203,7 @@ def manual(manual_stock, symbol):
 
 #working
 
-option = st.sidebar.selectbox("Which Dashboard?", ('My Portfolio', 'Investment', 'Research'), 1)
+option = st.sidebar.selectbox("Which Dashboard?", ('My Portfolio', 'Investment'), 1)
 manual_stock = []
 st.header(option)
 

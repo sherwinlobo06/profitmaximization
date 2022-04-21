@@ -47,11 +47,11 @@ def topgainer(df):
  assets.drop(['Date'],inplace = True, axis=1)
  assets.dropna(axis=1, inplace=True)
  
- st.dataframe(assets)
+
  daily_simple_returns = assets.pct_change()
  daily_simple_returns
  annualized_returns = daily_simple_returns.mean()*252
- annualized_returns
+ st.table(annualized_returns)
  sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
  sorted_annualized_returns
  chart_data = pd.DataFrame(annualized_returns, columns=["Returns"])

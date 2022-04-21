@@ -55,8 +55,7 @@ def topgainer(df):
  sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
  
  st.table(sorted_annualized_returns)
- chart_data = pd.DataFrame(annualized_returns, columns=["Returns"])
- st.bar_chart(chart_data)
+ 
  chart_data = pd.DataFrame(sorted_annualized_returns, columns=["Returns"])
  st.bar_chart(chart_data)
  

@@ -197,7 +197,10 @@ def manual(manual_stock, symbol):
     
 
 def topgainer(df):
- df
+ assets =  df
+ assets = assets.set_index(pd.DatetimeIndex(assets['Date'].values))
+ assets.drop(['Date'],inplace = True, axis=1)
+ assets
     
 
    

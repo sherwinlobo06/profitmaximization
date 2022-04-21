@@ -2,10 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-import requests, redis
-import config
-import json
-from iex import IEXStock
+
 from datetime import datetime, timedelta 
 import datetime as dt
 import os                               
@@ -14,24 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm              
 import scipy                            
 from pandas import read_csv
-import sklearn
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler    
-import seaborn as sns  
-from pylab import plot,show
-from numpy import SHIFT_UNDERFLOW, vstack,array
-from numpy.random import rand
-from scipy.cluster.vq import kmeans,vq
-import pandas_datareader as dr
-from math import sqrt
-from sklearn.cluster import KMeans
-from numpy.random import rand
-#PyportfolioOpt
-from pypfopt.efficient_frontier import EfficientFrontier
-from pypfopt import risk_models
-from pypfopt import expected_returns
-from pypfopt.discrete_allocation import DiscreteAllocation, get_latest_prices
-from PIL import Image
+
 
  
    
@@ -74,9 +54,9 @@ def topgainer(df):
  annualized_returns
  sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
  sorted_annualized_returns
- chart_data = pd.DataFrame(annualized_returns, annualized_returns.index)
+ chart_data = pd.DataFrame(annualized_returns, columns=["Returns"])
  st.bar_chart(chart_data)
- chart_data = pd.DataFrame(sorted_annualized_returns, sorted_annualized_returns.index)
+ chart_data = pd.DataFrame(sorted_annualized_returns, columns=["Returns"])
  st.bar_chart(chart_data)
  
  

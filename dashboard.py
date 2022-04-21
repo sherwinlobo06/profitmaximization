@@ -93,7 +93,7 @@ def topgainer(df):
  chart_data = pd.DataFrame(annualized_returns, annualized_returns.index)
  st.bar_chart(chart_data)
  chart_data = pd.DataFrame(sorted_annualized_returns, sorted_annualized_returns.index)
- st.bar_chart(chart_data
+ st.bar_chart(chart_data)
  
  
 

@@ -196,7 +196,8 @@ def manual(manual_stock, symbol):
 
     
 
-
+def topgainer(df):
+ 
     
 
    
@@ -220,10 +221,28 @@ if option == 'My Portfolio':
         st.write("Well done")
 
 if option == 'Investment':
-    screen = st.sidebar.selectbox("View", ('All Stock', 'Optimization'), index=0)
+    screen = st.sidebar.selectbox("View", ('All Stock', 'Top Gainer'), index=0)
     st.title(screen)
     if screen == 'All Stock':
         display_details()   
+    
+    if screen == 'Top Gainer':
+        cap = st.sidebar.selectbox("category", ('Nasdaq', 'Large Cap','Mid Cap'), index=0)
+
+        submitButton = st.sidebar.button("Submit")
+        if submitButton == True:
+            if cap == 'Nasdaq':
+                st.write(cap)
+                df = pd.read_csv('./NASDAQ.csv')
+                black_litterman(df)
+            if cap == 'Large Cap':
+                st.write(cap)
+                df = pd.read_csv('./Large_cap.csv')
+                black_litterman(df)
+            if cap == 'Mid Cap':
+                st.write(cap)
+                df = pd.read_csv('./mid_cap.csv')
+                black_litterman(df)
 
     if screen == 'Optimization':
         
@@ -246,6 +265,7 @@ if option == 'Investment':
                     st.write(cap)
                     df = pd.read_csv('./mid_cap.csv')
                     black_litterman(df, cash)
+    
 
         
         if mode == 'Manual':

@@ -52,31 +52,14 @@ def make_groups(df,num_clusters):
     return list_of_groups
 
 
-def get_company_name(symbol):
-  url = 'http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+symbol+'&region=1&lang=en'
-  result =requests.get(url).json()
-  for r in result['ResultSet']['Result']:
-    if r['symbol']==symbol:
-      return r['name']
+
 
 
 def work_in_progress():
     img = Image.open('work_in_progress.jpg')
     st.image(img)
 
-def manual(manual_stock, symbol):
-    manual_stock.append(symbol)
-    if add == True:
-        manual(manual_stock, symbol)
-
-    submit = st.button('submit')
-    if submit == True:
-        if len(manual_stock) == 0:
-            st.write(" Please select stock!!")
-        else:
-            st.write(manual_stock)
-
-    
+  
 
 def topgainer(df):
  assets =  df
@@ -90,9 +73,7 @@ def topgainer(df):
  annualized_returns = daily_simple_returns.mean()*252
  annualized_returns
  sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
- labels =['Stock Symbol', 'Return']
- df = pd.DataFrame.from_records(sorted_annualized_returns, columns=labels)
- st.write(df)
+ sorted_annualized_returns
  chart_data = pd.DataFrame(annualized_returns, annualized_returns.index)
  st.bar_chart(chart_data)
  chart_data = pd.DataFrame(sorted_annualized_returns, sorted_annualized_returns.index)

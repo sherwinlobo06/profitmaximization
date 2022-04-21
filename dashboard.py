@@ -50,71 +50,7 @@ def make_groups(df,num_clusters):
                 single_group.append(prices_sp["Stock Symbol"])
         list_of_groups.append(single_group)
     return list_of_groups
-def clustering():
 
-    
-    plt.rcParams['figure.figsize'] = 9,8
-
-    prices_df = pd.read_csv("closeprice.csv")
-    prices_df.sort_index(inplace=True)
-    st.dataframe(prices_df)
-    returns = prices_df.pct_change().mean() * 252
-    returns = pd.DataFrame(returns)
-
-    returns.columns = ['Returns']
-    returns['Volatility'] = prices_df.pct_change().std() * sqrt(252)
-    volatility=prices_df.pct_change().std()*sqrt(252)
-
-    data = np.asarray([np.asarray(returns['Returns']),np.asarray(returns['Volatility'])]).T
-    labels =['Returns', 'Volatility']
-    cleaned_data = np.where(np.isnan(data), 0, data)
-    nd=pd.DataFrame(cleaned_data, columns=labels)
-
-    st.dataframe(nd)
-
-    from sklearn.cluster import KMeans
-    X = cleaned_data
-    wcss = []
-    for k in range(2, 20):
-        k_means = KMeans(n_clusters=k)
-        k_means.fit(X)
-        wcss.append(k_means.inertia_)
-
-    fig = plt.figure(figsize=(15, 5))
-    plt.plot(range(2, 20), wcss)
-    plt.grid(True)
-    plt.title('Elbow curve')
-    elbow_curve = plt.show()
-    st.write(elbow_curve)
-    centroids,_ = kmeans(cleaned_data,5)
-    # assign each sample to a cluster
-    idx,_ = vq(cleaned_data,centroids)
-    
-    data = cleaned_data
-    idx
-    plt.scatter(X[idx==0,0],X[idx==0,1],s=100,c='red',label='Cluster1',alpha=0.65)
-    plt.scatter(X[idx==1,0],X[idx==1,1],s=100,c='blue',label='Cluster2',alpha=0.65)
-    plt.scatter(X[idx==2,0],X[idx==2,1],s=100,c='green',label='Cluster3',alpha=0.65)
-    plt.scatter(X[idx==3,0],X[idx==3,1],s=100,c='cyan',label='Cluster4',alpha=0.65)
-    plt.scatter(X[idx==4,0],X[idx==4,1],s=100,c='black',label='Cluster5',alpha=0.65)
-    #plt.scatter(k_means.cluster_centers_[:,0],k_means.cluster_centers_[:,1],s=300,c='yellow')
-    plt.scatter(centroids[:,0],centroids[:,1],s=200, c='yellow', alpha = 0.8)
-    plt.legend()
-    plt.xlabel('Volatility')
-    plt.ylabel('Returns')
-    plt.show()
-
-    details = [(name,cluster) for name, cluster in zip(returns.index,idx)]
-
-    labels =['Stock Symbol', 'Cluster']
-    df = pd.DataFrame.from_records(details, columns=labels)
-    num_clusters=5
-        
-    dummy=make_groups(df,5)
-    dummy
-    dm=pd.DataFrame(dummy)
-    dm.drop(0, axis='columns', inplace=True)
-    st.dataframe(dm)
 
 def get_company_name(symbol):
   url = 'http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+symbol+'&region=1&lang=en'
@@ -122,60 +58,6 @@ def get_company_name(symbol):
   for r in result['ResultSet']['Result']:
     if r['symbol']==symbol:
       return r['name']
-
-
-def black_litterman(df, cash):
-
-    
-    df = df.set_index(pd.DatetimeIndex(df['Date'].values))
-
-    df.drop(columns=['Date'], axis=1, inplace=True)
-    assets = df.columns
-    #calculate annualized returns
-    mu = expected_returns.mean_historical_return(df)
-    S = risk_models.sample_cov(df)
-
-    #optomize for the maximum sharpe ratio
-    ef = EfficientFrontier(mu, S)
-    weight = ef.max_sharpe()
-
-    cleaned_weights = ef.clean_weights()
-    #print(cleaned_weights)
-    returns = ef.portfolio_performance(verbose=True)
-    r_df = pd.DataFrame(columns=['Parameter', 'Values'])
-    r_df['Parameter'] = ['Expected annual return','Annual volatility','Sharpe Ratio']
-    r_df['Values'] = returns
-    
-
-    portfolio_val=cash
-    latest_prices=get_latest_prices(df)
-    weights = cleaned_weights
-    da = DiscreteAllocation(weights, latest_prices, total_portfolio_value = portfolio_val)
-    allocation, leftover = da.greedy_portfolio()
-    #st.write('Discrete allocation:', allocation)
-    #st.write('Funds Remaining: $', leftover)
-
-
-    #Store the company name into lsit
-    company_name = []
-    for symbol in allocation:
-        company_name.append( get_company_name(symbol))
-
-    #Get the discrete
-    discrete_allocation_list = []
-    for symbol in allocation:
-        discrete_allocation_list.append( allocation.get(symbol))
-
-    #create dataframe for portfolio
-    portfolio_df = pd.DataFrame(columns=['Company_Name', 'Company_Symbol', 'Allocation_for_$'+str(portfolio_val)])
-
-    portfolio_df['Company_Name'] = company_name
-    portfolio_df['Company_Symbol'] = allocation
-    portfolio_df['Allocation_for_$'+str(portfolio_val)] = discrete_allocation_list
-
-    st.table(portfolio_df)
-    st.table(r_df)
-    st.write('Funds Remaining: $', leftover)
 
 
 def work_in_progress():

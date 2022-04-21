@@ -208,10 +208,11 @@ def topgainer(df):
  annualized_returns
  sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
  arr=sorted_annualized_returns
+ chart_data = pd.DataFrame(sorted_annualized_returns.index, sorted_annualized_returns)
+ st.bar_chart(chart_data)
  
  fig, ax = plt.subplots()
  ax.hist(arr, bins=1)
-
  st.pyplot(fig)
     
 

@@ -200,7 +200,14 @@ def topgainer(df):
  assets =  df
  assets = assets.set_index(pd.DatetimeIndex(assets['Date'].values))
  assets.drop(['Date'],inplace = True, axis=1)
+ assets.dropna(axis=1, inplace=True)
  assets
+ daily_simple_returns = assets.pct_change()
+ daily_simple_returns
+ annualized_returns = daily_simple_returns.mean()*252
+ annualized_returns
+ sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
+ sorted_annualized_returns
     
 
    

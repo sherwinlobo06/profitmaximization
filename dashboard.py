@@ -89,9 +89,12 @@ def topgainer(df):
  annualized_returns = daily_simple_returns.mean()*252
  annualized_returns
  sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
- chart=sorted_annualized_returns
- chart_data = pd.DataFrame(chart, chart.index)
+ sorted_annualized_returns
+ chart_data = pd.DataFrame(annualized_returns, annualized_returns.index)
  st.bar_chart(chart_data)
+ chart_data = pd.DataFrame(sorted_annualized_returns, sorted_annualized_returns.index)
+ st.bar_chart(chart_data
+ 
  
 
     

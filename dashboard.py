@@ -233,15 +233,15 @@ if option == 'Investment':
             if cap == 'Nasdaq':
                 st.write(cap)
                 df = pd.read_csv('./NASDAQ.csv')
-                black_litterman(df)
+                topgainer(df)
             if cap == 'Large Cap':
                 st.write(cap)
                 df = pd.read_csv('./Large_cap.csv')
-                black_litterman(df)
+                topgainer(df)
             if cap == 'Mid Cap':
                 st.write(cap)
                 df = pd.read_csv('./mid_cap.csv')
-                black_litterman(df)
+                topgainer(df)
 
     if screen == 'Optimization':
         

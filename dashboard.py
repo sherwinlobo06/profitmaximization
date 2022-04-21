@@ -197,13 +197,12 @@ def manual(manual_stock, symbol):
     
 
 def topgainer(df):
- 
+ df
     
 
    
 
 #working
-
 option = st.sidebar.selectbox("Which Dashboard?", ('My Portfolio', 'Investment'), 1)
 manual_stock = []
 st.header(option)

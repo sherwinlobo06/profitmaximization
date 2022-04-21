@@ -207,7 +207,12 @@ def topgainer(df):
  annualized_returns = daily_simple_returns.mean()*252
  annualized_returns
  sorted_annualized_returns = annualized_returns.sort_values(ascending=False)
- sorted_annualized_returns
+ arr=sorted_annualized_returns
+ 
+ fig, ax = plt.subplots()
+ ax.hist(arr, bins=1)
+
+ st.pyplot(fig)
     
 
    

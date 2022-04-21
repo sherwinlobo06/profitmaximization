@@ -83,12 +83,12 @@ if option == 'My Portfolio':
         st.write("Well done")
 
 if option == 'Investment':
-    screen = st.sidebar.selectbox("View", ('All Stock', 'Top Gainer'), index=0)
+    screen = st.sidebar.selectbox("View", ('All Stock', 'Annual return'), index=0)
     st.title(screen)
     if screen == 'All Stock':
         display_details()   
     
-    if screen == 'Top Gainer':
+    if screen == 'Annual return':
         cap = st.sidebar.selectbox("category", ('Nasdaq', 'Large Cap','Mid Cap'), index=0)
 
         submitButton = st.sidebar.button("Submit")
